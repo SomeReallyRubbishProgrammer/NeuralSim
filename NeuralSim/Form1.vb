@@ -15,7 +15,7 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-
+        Debug.Write("test")
 
         simgrid = New SimGrid(Panel1)
         simgrid.SquareSize = 48
