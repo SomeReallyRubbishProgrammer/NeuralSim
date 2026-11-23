@@ -1,8 +1,9 @@
-﻿Imports System.Net.Sockets
+﻿Imports System.Linq.Expressions
+Imports System.Net.Sockets
 Imports System.Threading
 
 Public Class Form1
-    Dim r As New Random
+    Public r As New Random
     Public simgrid As SimGrid
     Dim sim As Simulation
     Dim t As New System.Windows.Forms.Timer()
@@ -74,9 +75,11 @@ Public Class Form1
     Sub pause()
         Select Case paused
             Case True
+                tsb_Skip.Visible = False
                 t.Start()
 
             Case False
+                tsb_Skip.Visible = True
                 t.Stop()
         End Select
         paused = Not paused
@@ -102,6 +105,29 @@ Public Class Form1
     End Sub
 
     Private Sub lbl_Highscore_Click(sender As Object, e As EventArgs) Handles lbl_Highscore.Click
+
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+
+        Try
+            Dim psi As New ProcessStartInfo()
+            psi.FileName = "https://github.com/Scwidscwid/NeuralSim-"
+            psi.UseShellExecute = True
+
+
+            Process.Start(psi)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+
+        End Try
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles tsb_Skip.Click
+        sim.updateSimulation()
+    End Sub
+
+    Private Sub tsb_PausePlay_Click(sender As Object, e As EventArgs) Handles tsb_PausePlay.Click
 
     End Sub
 End Class

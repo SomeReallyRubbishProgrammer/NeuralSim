@@ -39,10 +39,10 @@ Partial Class Form1
         UpdateTimer = New Timer(components)
         tsp_SimulationControls = New ToolStrip()
         tsb_PausePlay = New ToolStripButton()
-        ToolStripSeparator3 = New ToolStripSeparator()
+        tsb_Skip = New ToolStripButton()
         tsp_Reset = New ToolStripButton()
-        ToolStripSeparator4 = New ToolStripSeparator()
         tsb_SimulationSpeed = New ToolStripButton()
+        ToolStripSeparator4 = New ToolStripSeparator()
         lbl_TicksThisSecond = New ToolStripLabel()
         lbl_TicksThisGeneration = New ToolStripLabel()
         msp_Sumulation = New MenuStrip()
@@ -76,6 +76,7 @@ Partial Class Form1
         nup_SimGridSize = New NumericUpDown()
         lbl_SimGridSize = New Label()
         FlowLayoutPanel1 = New FlowLayoutPanel()
+        tsc_Simulation = New ToolStripContainer()
         CType(nup_MaxFood, ComponentModel.ISupportInitialize).BeginInit()
         CType(nup_MaxFoodTime, ComponentModel.ISupportInitialize).BeginInit()
         CType(nup_MinFoodTime, ComponentModel.ISupportInitialize).BeginInit()
@@ -98,6 +99,9 @@ Partial Class Form1
         CType(nup_Organisms, ComponentModel.ISupportInitialize).BeginInit()
         gpb_SimulationGrid.SuspendLayout()
         CType(nup_SimGridSize, ComponentModel.ISupportInitialize).BeginInit()
+        tsc_Simulation.BottomToolStripPanel.SuspendLayout()
+        tsc_Simulation.ContentPanel.SuspendLayout()
+        tsc_Simulation.SuspendLayout()
         SuspendLayout()
         ' 
         ' lbl_MaxFood
@@ -221,27 +225,34 @@ Partial Class Form1
         ' 
         ' tsp_SimulationControls
         ' 
-        tsp_SimulationControls.Dock = DockStyle.Bottom
-        tsp_SimulationControls.Items.AddRange(New ToolStripItem() {tsb_PausePlay, ToolStripSeparator3, tsp_Reset, ToolStripSeparator4, tsb_SimulationSpeed, lbl_TicksThisSecond, lbl_TicksThisGeneration})
-        tsp_SimulationControls.Location = New Point(0, 456)
+        tsp_SimulationControls.Dock = DockStyle.None
+        tsp_SimulationControls.Items.AddRange(New ToolStripItem() {tsb_PausePlay, tsb_Skip, tsp_Reset, tsb_SimulationSpeed, ToolStripSeparator4, lbl_TicksThisSecond, lbl_TicksThisGeneration})
+        tsp_SimulationControls.Location = New Point(0, 0)
         tsp_SimulationControls.Name = "tsp_SimulationControls"
-        tsp_SimulationControls.Size = New Size(626, 25)
+        tsp_SimulationControls.Size = New Size(664, 26)
+        tsp_SimulationControls.Stretch = True
         tsp_SimulationControls.TabIndex = 1
         tsp_SimulationControls.Text = "ToolStrip1"
         ' 
         ' tsb_PausePlay
         ' 
+        tsb_PausePlay.AutoSize = False
         tsb_PausePlay.DisplayStyle = ToolStripItemDisplayStyle.Image
         tsb_PausePlay.Image = My.Resources.Resources.Play
         tsb_PausePlay.ImageTransparentColor = Color.Magenta
         tsb_PausePlay.Name = "tsb_PausePlay"
-        tsb_PausePlay.Size = New Size(23, 22)
+        tsb_PausePlay.Size = New Size(23, 23)
         tsb_PausePlay.Text = "Pause Simulation"
         ' 
-        ' ToolStripSeparator3
+        ' tsb_Skip
         ' 
-        ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(6, 25)
+        tsb_Skip.DisplayStyle = ToolStripItemDisplayStyle.Image
+        tsb_Skip.Image = My.Resources.Resources.Skip1
+        tsb_Skip.ImageTransparentColor = Color.Magenta
+        tsb_Skip.Name = "tsb_Skip"
+        tsb_Skip.Size = New Size(23, 23)
+        tsb_Skip.Text = "ToolStripButton1"
+        tsb_Skip.ToolTipText = "Jump 1 tick in the simulation"
         ' 
         ' tsp_Reset
         ' 
@@ -249,13 +260,8 @@ Partial Class Form1
         tsp_Reset.Image = My.Resources.Resources.Reset
         tsp_Reset.ImageTransparentColor = Color.Magenta
         tsp_Reset.Name = "tsp_Reset"
-        tsp_Reset.Size = New Size(23, 22)
+        tsp_Reset.Size = New Size(23, 23)
         tsp_Reset.Text = "Reset Simulation"
-        ' 
-        ' ToolStripSeparator4
-        ' 
-        ToolStripSeparator4.Name = "ToolStripSeparator4"
-        ToolStripSeparator4.Size = New Size(6, 25)
         ' 
         ' tsb_SimulationSpeed
         ' 
@@ -263,22 +269,27 @@ Partial Class Form1
         tsb_SimulationSpeed.Image = My.Resources.Resources._1x
         tsb_SimulationSpeed.ImageTransparentColor = Color.Magenta
         tsb_SimulationSpeed.Name = "tsb_SimulationSpeed"
-        tsb_SimulationSpeed.Size = New Size(23, 22)
+        tsb_SimulationSpeed.Size = New Size(23, 23)
         tsb_SimulationSpeed.Text = "ToolStripButton3"
         tsb_SimulationSpeed.ToolTipText = "Target simulation speed"
+        ' 
+        ' ToolStripSeparator4
+        ' 
+        ToolStripSeparator4.Name = "ToolStripSeparator4"
+        ToolStripSeparator4.Size = New Size(6, 26)
         ' 
         ' lbl_TicksThisSecond
         ' 
         lbl_TicksThisSecond.Name = "lbl_TicksThisSecond"
-        lbl_TicksThisSecond.Size = New Size(50, 22)
-        lbl_TicksThisSecond.Text = "Ticks/s: "
+        lbl_TicksThisSecond.Size = New Size(55, 23)
+        lbl_TicksThisSecond.Text = "Ticks/s: -"
         lbl_TicksThisSecond.ToolTipText = "Current number of ticks per second"
         ' 
         ' lbl_TicksThisGeneration
         ' 
         lbl_TicksThisGeneration.Name = "lbl_TicksThisGeneration"
-        lbl_TicksThisGeneration.Size = New Size(29, 22)
-        lbl_TicksThisGeneration.Text = "Tick"
+        lbl_TicksThisGeneration.Size = New Size(47, 23)
+        lbl_TicksThisGeneration.Text = "Tick -/-"
         lbl_TicksThisGeneration.ToolTipText = "Current tick"
         ' 
         ' msp_Sumulation
@@ -286,7 +297,7 @@ Partial Class Form1
         msp_Sumulation.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem, HelpToolStripMenuItem})
         msp_Sumulation.Location = New Point(0, 0)
         msp_Sumulation.Name = "msp_Sumulation"
-        msp_Sumulation.Size = New Size(626, 24)
+        msp_Sumulation.Size = New Size(664, 24)
         msp_Sumulation.TabIndex = 2
         msp_Sumulation.Text = "MenuStrip1"
         ' 
@@ -303,7 +314,7 @@ Partial Class Form1
         btn_Menustrip_Pause.ImageTransparentColor = Color.Magenta
         btn_Menustrip_Pause.Name = "btn_Menustrip_Pause"
         btn_Menustrip_Pause.ShortcutKeys = Keys.Control Or Keys.K
-        btn_Menustrip_Pause.Size = New Size(180, 22)
+        btn_Menustrip_Pause.Size = New Size(146, 22)
         btn_Menustrip_Pause.Text = "&Pause"
         ' 
         ' btn_Menustrip_Reset
@@ -312,19 +323,19 @@ Partial Class Form1
         btn_Menustrip_Reset.ImageTransparentColor = Color.Magenta
         btn_Menustrip_Reset.Name = "btn_Menustrip_Reset"
         btn_Menustrip_Reset.ShortcutKeys = Keys.Control Or Keys.R
-        btn_Menustrip_Reset.Size = New Size(180, 22)
+        btn_Menustrip_Reset.Size = New Size(146, 22)
         btn_Menustrip_Reset.Tag = ""
         btn_Menustrip_Reset.Text = "&Reset"
         ' 
         ' toolStripSeparator2
         ' 
         toolStripSeparator2.Name = "toolStripSeparator2"
-        toolStripSeparator2.Size = New Size(177, 6)
+        toolStripSeparator2.Size = New Size(143, 6)
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(180, 22)
+        ExitToolStripMenuItem.Size = New Size(146, 22)
         ExitToolStripMenuItem.Text = "E&xit"
         ' 
         ' HelpToolStripMenuItem
@@ -337,13 +348,13 @@ Partial Class Form1
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(180, 22)
+        AboutToolStripMenuItem.Size = New Size(116, 22)
         AboutToolStripMenuItem.Text = "&About..."
         ' 
         ' HelpToolStripMenuItem1
         ' 
         HelpToolStripMenuItem1.Name = "HelpToolStripMenuItem1"
-        HelpToolStripMenuItem1.Size = New Size(180, 22)
+        HelpToolStripMenuItem1.Size = New Size(116, 22)
         HelpToolStripMenuItem1.Text = "Help"
         ' 
         ' TabControl1
@@ -351,10 +362,10 @@ Partial Class Form1
         TabControl1.Controls.Add(tbp_Simulation)
         TabControl1.Controls.Add(tbp_SimulationSettings)
         TabControl1.Dock = DockStyle.Fill
-        TabControl1.Location = New Point(0, 24)
+        TabControl1.Location = New Point(0, 0)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(626, 432)
+        TabControl1.Size = New Size(664, 413)
         TabControl1.TabIndex = 3
         ' 
         ' tbp_Simulation
@@ -363,7 +374,7 @@ Partial Class Form1
         tbp_Simulation.Location = New Point(4, 24)
         tbp_Simulation.Name = "tbp_Simulation"
         tbp_Simulation.Padding = New Padding(3)
-        tbp_Simulation.Size = New Size(618, 404)
+        tbp_Simulation.Size = New Size(656, 385)
         tbp_Simulation.TabIndex = 0
         tbp_Simulation.Text = "Simulation"
         tbp_Simulation.UseVisualStyleBackColor = True
@@ -380,7 +391,7 @@ Partial Class Form1
         TableLayoutPanel1.Name = "TableLayoutPanel1"
         TableLayoutPanel1.RowCount = 1
         TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        TableLayoutPanel1.Size = New Size(612, 398)
+        TableLayoutPanel1.Size = New Size(650, 379)
         TableLayoutPanel1.TabIndex = 2
         ' 
         ' gpb_Simulation
@@ -388,9 +399,9 @@ Partial Class Form1
         gpb_Simulation.Controls.Add(lbl_HighestScore)
         gpb_Simulation.Controls.Add(lbl_Highscore)
         gpb_Simulation.Dock = DockStyle.Fill
-        gpb_Simulation.Location = New Point(415, 3)
+        gpb_Simulation.Location = New Point(453, 3)
         gpb_Simulation.Name = "gpb_Simulation"
-        gpb_Simulation.Size = New Size(194, 392)
+        gpb_Simulation.Size = New Size(194, 373)
         gpb_Simulation.TabIndex = 1
         gpb_Simulation.TabStop = False
         gpb_Simulation.Text = "Simulation"
@@ -410,14 +421,13 @@ Partial Class Form1
         lbl_Highscore.Name = "lbl_Highscore"
         lbl_Highscore.Size = New Size(41, 15)
         lbl_Highscore.TabIndex = 0
-        lbl_Highscore.Text = "Label1"
         ' 
         ' Panel1
         ' 
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(3, 3)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(406, 392)
+        Panel1.Size = New Size(444, 373)
         Panel1.TabIndex = 1
         ' 
         ' tbp_SimulationSettings
@@ -427,7 +437,7 @@ Partial Class Form1
         tbp_SimulationSettings.Location = New Point(4, 24)
         tbp_SimulationSettings.Name = "tbp_SimulationSettings"
         tbp_SimulationSettings.Padding = New Padding(3)
-        tbp_SimulationSettings.Size = New Size(618, 404)
+        tbp_SimulationSettings.Size = New Size(656, 385)
         tbp_SimulationSettings.TabIndex = 1
         tbp_SimulationSettings.Text = "Simulation Settings"
         tbp_SimulationSettings.UseVisualStyleBackColor = True
@@ -444,7 +454,7 @@ Partial Class Form1
         FlowLayoutPanel2.FlowDirection = FlowDirection.TopDown
         FlowLayoutPanel2.Location = New Point(3, 3)
         FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        FlowLayoutPanel2.Size = New Size(612, 398)
+        FlowLayoutPanel2.Size = New Size(650, 379)
         FlowLayoutPanel2.TabIndex = 12
         ' 
         ' gpb_Food
@@ -522,7 +532,7 @@ Partial Class Form1
         gpb_Organisms.AutoSizeMode = AutoSizeMode.GrowAndShrink
         gpb_Organisms.Controls.Add(nup_Organisms)
         gpb_Organisms.Controls.Add(lbl_OrganismCount)
-        gpb_Organisms.Location = New Point(3, 323)
+        gpb_Organisms.Location = New Point(291, 3)
         gpb_Organisms.Name = "gpb_Organisms"
         gpb_Organisms.Size = New Size(282, 62)
         gpb_Organisms.TabIndex = 11
@@ -554,7 +564,7 @@ Partial Class Form1
         gpb_SimulationGrid.AutoSizeMode = AutoSizeMode.GrowAndShrink
         gpb_SimulationGrid.Controls.Add(nup_SimGridSize)
         gpb_SimulationGrid.Controls.Add(lbl_SimGridSize)
-        gpb_SimulationGrid.Location = New Point(291, 3)
+        gpb_SimulationGrid.Location = New Point(291, 71)
         gpb_SimulationGrid.Name = "gpb_SimulationGrid"
         gpb_SimulationGrid.Size = New Size(282, 62)
         gpb_SimulationGrid.TabIndex = 12
@@ -589,18 +599,38 @@ Partial Class Form1
         FlowLayoutPanel1.Size = New Size(0, 0)
         FlowLayoutPanel1.TabIndex = 11
         ' 
+        ' tsc_Simulation
+        ' 
+        ' 
+        ' tsc_Simulation.BottomToolStripPanel
+        ' 
+        tsc_Simulation.BottomToolStripPanel.Controls.Add(tsp_SimulationControls)
+        ' 
+        ' tsc_Simulation.ContentPanel
+        ' 
+        tsc_Simulation.ContentPanel.Controls.Add(TabControl1)
+        tsc_Simulation.ContentPanel.Size = New Size(664, 413)
+        tsc_Simulation.Dock = DockStyle.Fill
+        tsc_Simulation.LeftToolStripPanelVisible = False
+        tsc_Simulation.Location = New Point(0, 24)
+        tsc_Simulation.Name = "tsc_Simulation"
+        tsc_Simulation.RightToolStripPanelVisible = False
+        tsc_Simulation.Size = New Size(664, 464)
+        tsc_Simulation.TabIndex = 0
+        tsc_Simulation.Text = "ToolStripContainer1"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         AutoValidate = AutoValidate.EnablePreventFocusChange
-        ClientSize = New Size(626, 481)
-        Controls.Add(TabControl1)
-        Controls.Add(tsp_SimulationControls)
+        ClientSize = New Size(664, 488)
+        Controls.Add(tsc_Simulation)
         Controls.Add(msp_Sumulation)
         MainMenuStrip = msp_Sumulation
         Name = "Form1"
         Text = "Neural Sim"
+        TransparencyKey = Color.MintCream
         CType(nup_MaxFood, ComponentModel.ISupportInitialize).EndInit()
         CType(nup_MaxFoodTime, ComponentModel.ISupportInitialize).EndInit()
         CType(nup_MinFoodTime, ComponentModel.ISupportInitialize).EndInit()
@@ -633,6 +663,11 @@ Partial Class Form1
         gpb_SimulationGrid.ResumeLayout(False)
         gpb_SimulationGrid.PerformLayout()
         CType(nup_SimGridSize, ComponentModel.ISupportInitialize).EndInit()
+        tsc_Simulation.BottomToolStripPanel.ResumeLayout(False)
+        tsc_Simulation.BottomToolStripPanel.PerformLayout()
+        tsc_Simulation.ContentPanel.ResumeLayout(False)
+        tsc_Simulation.ResumeLayout(False)
+        tsc_Simulation.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -652,7 +687,6 @@ Partial Class Form1
     Friend WithEvents tbp_Simulation As TabPage
     Friend WithEvents tbp_SimulationSettings As TabPage
     Friend WithEvents tsb_PausePlay As ToolStripButton
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents tsp_Reset As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents tsb_SimulationSpeed As ToolStripButton
@@ -688,5 +722,7 @@ Partial Class Form1
     Friend WithEvents nup_SimGridSize As NumericUpDown
     Friend WithEvents lbl_SimGridSize As Label
     Friend WithEvents lbl_HighestScore As Label
+    Friend WithEvents tsb_Skip As ToolStripButton
+    Friend WithEvents tsc_Simulation As ToolStripContainer
 
 End Class

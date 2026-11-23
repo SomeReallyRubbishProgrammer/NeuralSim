@@ -20,6 +20,9 @@
     Function GetNeuronCount()
         Return neurons.Count
     End Function
+    Function GetNeurons() As List(Of Neuron)
+        Return neurons
+    End Function
     Sub Mutate(MutationValue As Decimal)
         For Each n As Neuron In neurons
             n.mutate(MutationValue)

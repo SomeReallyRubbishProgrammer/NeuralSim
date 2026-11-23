@@ -9,7 +9,7 @@ Public Class Simulation
     Dim MaxFoodTime As Integer = 0
     Dim MaxFood As Integer = 0
     Private FoodSpawnRate As Decimal = 0
-    Public TicksPerGeneration As Integer = 1000
+    Public TicksPerGeneration As Integer = 100
     Private FoodTypes As Boolean = False
 
 
@@ -58,6 +58,8 @@ Public Class Simulation
     End Sub
     Sub NewGeneration()
         generation += 1
+        MutateOrganisms()
+
     End Sub
 
     Sub updateSimulation()
@@ -143,10 +145,9 @@ Public Class Simulation
         Next
     End Sub
 
-    'Private Function CombineNeuralNetworks(p_Network1 As NeuralNetwork, p_Network2 As NeuralNetwork) As NeuralNetwork
-    '    If p_Network1.LayerCount = p_Network2.LayerCount Then
-    '        Dim network As New NeuralNetwork
-    '        Dim HiddenLayers As New List(Of Layer)
+    Private Function CombineNeuralNetworks(p_Network1 As NeuralNetwork, p_Network2 As NeuralNetwork) As NeuralNetwork
+        If p_Network1.LayerCount = p_Network2.LayerCount Then
+            p_Network1.GetHiddenLayers()
 
 
 
@@ -154,8 +155,16 @@ Public Class Simulation
 
 
 
-    '    End If
-    'End Function
+        End If
+    End Function
+    Private Function CombineLayer(p_layer1 As Layer, p_layer2 As Layer) As Layer
+        Dim layer1neurons As List(Of Neuron) = p_layer1.GetNeurons
+        Dim layer2neurons As List(Of Neuron) = p_layer2.GetNeurons
+        For i = 0 To layer1neurons.Count - 1
+            'layer1neurons(i)
+        Next
+
+    End Function
     Public Function GetNearestFoodAngle(p_x, p_y) As Decimal
         Dim FoodFound As Boolean = False
         Dim CurrentRing As Integer = 0
@@ -201,25 +210,6 @@ Public Class Simulation
         Return Coordinates
     End Function
     Function GetAngle(organism As Point, food As Point) As Decimal
-        'Dim angle As Decimal = Math.Atan2(Math.Abs(organism.Y - food.Y), Math.Abs(organism.X - food.X))
-        'Debug.WriteLine(angle)    '* 180 / Math.PI
-        ''If angle < 0 Then angle += Math.PI
-        'Return angle / Math.PI / 2
-
-        'Dim x As New Vector2
-        'x.X = Math.Abs(organism.X - food.X)
-        'x.Y = organism.Y - food.Y
-        '
-        'Dim Vertical As New Vector2
-        'Vertical.X = 0
-        'Vertical.Y = 1
-
-
-        ''Dim FoodVector As New Vector2
-        ''FoodVector.X = food.X - organism.X
-        ''FoodVector.Y = food.Y - organism.Y
-        ''Return Math.Acos(Math.Abs(Vector2.Dot(Vector2.UnitY, FoodVector) / (Math.Sqrt(Math.Abs(organism.Y - food.Y) ^ 2 + Math.Abs(organism.X - food.X) ^ 2)))) / Math.Tau
-
 
 
         Dim x As Integer = organism.X - food.X

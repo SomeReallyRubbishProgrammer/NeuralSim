@@ -1,7 +1,7 @@
 ﻿Public Class Neuron
     Dim bias As Decimal
     Dim weights() As Decimal
-    Dim r As New Random
+
 
     Sub New(p_NumberOfInputs As Integer, p_RandomWeights As Boolean)
         ReDim weights(p_NumberOfInputs)
@@ -41,6 +41,10 @@
         Return Math.Sin(p_input)
     End Function
     Sub Mutate(MutationValue As Decimal)
-        bias += r.Next(-Math.Min(MutationValue, 1 - bias), Math.Min(MutationValue, 1 - bias))
+        bias += Form1.r.Next(-Math.Min(MutationValue, 1 - bias), Math.Min(MutationValue, 1 - bias))
     End Sub
+    Function combine(p_neuron As Neuron) As Neuron
+        Dim n As New Neuron(weights.Length, False)
+
+    End Function
 End Class
