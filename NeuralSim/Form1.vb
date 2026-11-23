@@ -29,7 +29,6 @@ Public Class Form1
         AddHandler nup_MaxFood.ValueChanged, Sub() UpdateSettings()
         AddHandler nup_FoodSpawnRate.ValueChanged, Sub() UpdateSettings()
         AddHandler nup_MaxFoodTime.ValueChanged, Sub() UpdateSettings()
-        AddHandler nup_MaxFoodTime.ValueChanged, Sub() UpdateSettings()
         AddHandler btn_Menustrip_Reset.Click, Sub() ResetSimulation()
         AddHandler tsp_Reset.Click, Sub() ResetSimulation()
         AddHandler ExitToolStripMenuItem.Click, Sub() End
@@ -46,7 +45,7 @@ Public Class Form1
         lbl_TicksThisSecond.Text = $"Ticks/s: {sim.TicksThisSecond * 2}"
         sim.TicksThisSecond = 0
     End Sub
-    Sub setspeed(p_speed As Integer)
+    Sub setspeed()
         Select Case speed
             Case 0
                 t.Interval = 250
@@ -58,7 +57,7 @@ Public Class Form1
     End Sub
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsb_SimulationSpeed.Click
         If speed < 2 Then speed += 1 Else speed = 0
-        setspeed(speed)
+        setspeed()
         Select Case speed
 
 
@@ -105,15 +104,11 @@ Public Class Form1
         nup_MinFoodTime.Maximum = nup_MaxFoodTime.Value
     End Sub
 
-    Private Sub lbl_Highscore_Click(sender As Object, e As EventArgs) Handles lbl_Highscore.Click
-
-    End Sub
-
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
 
         Try
             Dim psi As New ProcessStartInfo()
-            psi.FileName = "https://github.com/SomeReallyRubbishProgrammer/NeuralSim-"
+            psi.FileName = "https://github.com/SomeReallyRubbishProgrammer/NeuralSim"
             psi.UseShellExecute = True
 
 
@@ -124,9 +119,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles tsb_Skip.Click
-        sim.updateSimulation()
-    End Sub
+
 
     Private Sub tsb_PausePlay_Click(sender As Object, e As EventArgs) Handles tsb_PausePlay.Click
 
