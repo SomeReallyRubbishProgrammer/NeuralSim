@@ -112,7 +112,7 @@ Public Class Form1
 
         Try
             Dim psi As New ProcessStartInfo()
-            psi.FileName = "https://github.com/Scwidscwid/NeuralSim-"
+            psi.FileName = "https://github.com/SomeReallyRubbishProgrammer/NeuralSim-"
             psi.UseShellExecute = True
 
 
