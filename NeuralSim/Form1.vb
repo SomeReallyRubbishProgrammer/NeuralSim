@@ -1,7 +1,7 @@
 ﻿Imports System.Linq.Expressions
 Imports System.Net.Sockets
 Imports System.Threading
-'this is test text for github
+
 
 Public Class Form1
     Public r As New Random
@@ -15,7 +15,7 @@ Public Class Form1
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Debug.Write("test") ' ?????
+
 
         simgrid = New SimGrid(Panel1)
         simgrid.SquareSize = 48
