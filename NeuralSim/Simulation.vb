@@ -48,7 +48,7 @@ Public Class Simulation
     End Sub
     Sub New(p_grid As SimGrid, p_OrganismCount As Decimal)
         grid = p_grid
-        For i = 0 To p_OrganismCount - 1 -
+        For i = 0 To p_OrganismCount - 1
             organisms.Add(New Organism(Me))
 
         Next
