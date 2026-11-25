@@ -77,6 +77,8 @@ Partial Class Form1
         lbl_SimGridSize = New Label()
         FlowLayoutPanel1 = New FlowLayoutPanel()
         tsc_Simulation = New ToolStripContainer()
+        PrefrencesToolStripMenuItem = New ToolStripMenuItem()
+        DarkModeToolStripMenuItem = New ToolStripMenuItem()
         CType(nup_MaxFood, ComponentModel.ISupportInitialize).BeginInit()
         CType(nup_MaxFoodTime, ComponentModel.ISupportInitialize).BeginInit()
         CType(nup_MinFoodTime, ComponentModel.ISupportInitialize).BeginInit()
@@ -294,7 +296,7 @@ Partial Class Form1
         ' 
         ' msp_Sumulation
         ' 
-        msp_Sumulation.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem, HelpToolStripMenuItem})
+        msp_Sumulation.Items.AddRange(New ToolStripItem() {FileToolStripMenuItem, PrefrencesToolStripMenuItem, HelpToolStripMenuItem})
         msp_Sumulation.Location = New Point(0, 0)
         msp_Sumulation.Name = "msp_Sumulation"
         msp_Sumulation.Size = New Size(664, 24)
@@ -348,13 +350,13 @@ Partial Class Form1
         ' AboutToolStripMenuItem
         ' 
         AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        AboutToolStripMenuItem.Size = New Size(116, 22)
+        AboutToolStripMenuItem.Size = New Size(180, 22)
         AboutToolStripMenuItem.Text = "&About..."
         ' 
         ' HelpToolStripMenuItem1
         ' 
         HelpToolStripMenuItem1.Name = "HelpToolStripMenuItem1"
-        HelpToolStripMenuItem1.Size = New Size(116, 22)
+        HelpToolStripMenuItem1.Size = New Size(180, 22)
         HelpToolStripMenuItem1.Text = "Help"
         ' 
         ' TabControl1
@@ -619,6 +621,19 @@ Partial Class Form1
         tsc_Simulation.TabIndex = 0
         tsc_Simulation.Text = "ToolStripContainer1"
         ' 
+        ' PrefrencesToolStripMenuItem
+        ' 
+        PrefrencesToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {DarkModeToolStripMenuItem})
+        PrefrencesToolStripMenuItem.Name = "PrefrencesToolStripMenuItem"
+        PrefrencesToolStripMenuItem.Size = New Size(74, 20)
+        PrefrencesToolStripMenuItem.Text = "Prefrences"
+        ' 
+        ' DarkModeToolStripMenuItem
+        ' 
+        DarkModeToolStripMenuItem.Name = "DarkModeToolStripMenuItem"
+        DarkModeToolStripMenuItem.Size = New Size(180, 22)
+        DarkModeToolStripMenuItem.Text = "Dark Mode"
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -724,5 +739,7 @@ Partial Class Form1
     Friend WithEvents lbl_HighestScore As Label
     Friend WithEvents tsb_Skip As ToolStripButton
     Friend WithEvents tsc_Simulation As ToolStripContainer
+    Friend WithEvents PrefrencesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DarkModeToolStripMenuItem As ToolStripMenuItem
 
 End Class

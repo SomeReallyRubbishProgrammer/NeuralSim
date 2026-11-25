@@ -49,7 +49,9 @@
         Next
 
     End Sub
-
+    Sub SetHiddenLayers(p_layers As List(Of Layer))
+        HiddenLayers = p_layers
+    End Sub
     Function CalculateOutput(p_angle As Decimal) As NetworkOutput
         Dim inputlayeroutput As Decimal = inputLayer.CalculateOutput(p_angle)
         Dim LastLayerOutputs(4) As Decimal

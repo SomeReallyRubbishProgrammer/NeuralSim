@@ -58,6 +58,10 @@ Public Class Simulation
     End Sub
     Sub NewGeneration()
         generation += 1
+
+
+
+
         MutateOrganisms()
 
     End Sub
@@ -126,9 +130,9 @@ Public Class Simulation
 
 
     End Sub
-    Private Function GetHighest() As Organism
-        Dim highest As Organism = organisms(0)
-        For Each o As Organism In organisms
+    Private Function GetHighest(p_organisms As List(Of Organism)) As Organism
+        Dim highest As Organism = p_organisms(0)
+        For Each o As Organism In p_organisms
             If o.score > highest.score Then highest = o
         Next
         Return highest
@@ -146,24 +150,26 @@ Public Class Simulation
     End Sub
 
     Private Function CombineNeuralNetworks(p_Network1 As NeuralNetwork, p_Network2 As NeuralNetwork) As NeuralNetwork
+        Dim tmpNetwork As New NeuralNetwork(p_Network1.LayerCount, 5)
+        Dim layers As New List(Of Layer)
         If p_Network1.LayerCount = p_Network2.LayerCount Then
-            p_Network1.GetHiddenLayers()
-
-
-
-
-
-
-
+            For i = 0 To p_Network1.LayerCount - 1
+                layers.Add(CombineLayer(p_Network1.GetHiddenLayers(i), p_Network2.GetHiddenLayers(i)))
+            Next
         End If
+        tmpNetwork.SetHiddenLayers(layers)
+        Return tmpNetwork
     End Function
     Private Function CombineLayer(p_layer1 As Layer, p_layer2 As Layer) As Layer
+        Dim tmpLayer As New Layer(p_layer1.GetNeuronCount, p_layer1.GetNeuronCount, False)
+        Dim neurons As New List(Of Neuron)
         Dim layer1neurons As List(Of Neuron) = p_layer1.GetNeurons
         Dim layer2neurons As List(Of Neuron) = p_layer2.GetNeurons
         For i = 0 To layer1neurons.Count - 1
-            'layer1neurons(i)
+            neurons.Add(layer1neurons(i).combine(layer2neurons(i)))
         Next
-
+        tmpLayer.SetNeurons(neurons)
+        Return tmpLayer
     End Function
     Public Function GetNearestFoodAngle(p_x, p_y) As Decimal
         Dim FoodFound As Boolean = False
@@ -225,6 +231,28 @@ Public Class Simulation
 
 
     End Function
+
+    Function GetHighestOrganisms(count As Integer) As List(Of Organism)
+        Dim tmporganisms As List(Of Organism) = organisms
+        Dim tmpHighorganisms As New List(Of Organism)
+        Do Until tmpHighorganisms.Count >= count Or tmporganisms.Count = 0
+            Dim currenthighest = GetHighest(tmporganisms)
+            tmpHighorganisms.Add(currenthighest)
+            tmporganisms.Remove(currenthighest)
+        Loop
+        Return tmpHighorganisms
+
+
+
+    End Function
+
+
+
+
+
+
+
+
     Private Function GetDistance(p_1 As Point, p_2 As Point) As Decimal
         Return Math.Sqrt((p_1.X - p_2.X) ^ 2 + (p_1.Y - p_2.Y) ^ 2)
     End Function

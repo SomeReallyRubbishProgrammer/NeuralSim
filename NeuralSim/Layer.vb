@@ -20,6 +20,9 @@
     Function GetNeuronCount()
         Return neurons.Count
     End Function
+    Sub SetNeurons(p_neurons As List(Of Neuron))
+        neurons = p_neurons
+    End Sub
     Function GetNeurons() As List(Of Neuron)
         Return neurons
     End Function

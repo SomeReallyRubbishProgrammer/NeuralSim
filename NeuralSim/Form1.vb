@@ -11,6 +11,7 @@ Public Class Form1
     Dim tpsTimer As New System.Windows.Forms.Timer()
     Dim paused As Boolean = True
     Dim speed As Integer = 0
+    Dim DarkMode As Boolean = False
 
 
 
@@ -106,12 +107,15 @@ Public Class Form1
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
 
+        OpenWebPage("https://github.com/SomeReallyRubbishProgrammer/NeuralSim")
+    End Sub
+
+    Sub OpenWebPage(p_url As String)
+
         Try
             Dim psi As New ProcessStartInfo()
-            psi.FileName = "https://github.com/SomeReallyRubbishProgrammer/NeuralSim"
+            psi.FileName = p_url
             psi.UseShellExecute = True
-
-
             Process.Start(psi)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -119,9 +123,35 @@ Public Class Form1
         End Try
     End Sub
 
-
-
     Private Sub tsb_PausePlay_Click(sender As Object, e As EventArgs) Handles tsb_PausePlay.Click
 
+    End Sub
+
+    Private Sub HelpToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem1.Click
+        OpenWebPage("https://github.com/SomeReallyRubbishProgrammer/NeuralSim/wiki/Help")
+    End Sub
+
+    Private Sub DarkModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DarkModeToolStripMenuItem.Click
+        DarkMode = Not DarkMode
+        If DarkMode Then
+            Me.BackColor = Color.Black
+            tbp_Simulation.BackColor = Color.Black
+            tbp_Simulation.BackColor = Color.Black
+            FlowLayoutPanel2.BackColor = Color.Black
+            Me.ForeColor = Color.Gray
+            tbp_Simulation.ForeColor = Color.Gray
+            tbp_SimulationSettings.ForeColor = Color.Gray
+        Else
+            Me.BackColor = Color.White
+            tbp_Simulation.BackColor = Color.White
+            tbp_Simulation.BackColor = Color.White
+            FlowLayoutPanel2.BackColor = Color.White
+            Me.ForeColor = Color.Black
+            tbp_Simulation.ForeColor = Color.Black
+            tbp_SimulationSettings.ForeColor = Color.Black
+        End If
+
+
+        DarkModeToolStripMenuItem.Checked = DarkMode
     End Sub
 End Class

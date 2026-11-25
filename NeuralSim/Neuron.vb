@@ -45,6 +45,12 @@
     End Sub
     Function combine(p_neuron As Neuron) As Neuron
         Dim n As New Neuron(weights.Length, False)
-
+        Dim tmpWeights() As Decimal
+        For i = 0 To weights.Length - 1
+            tmpWeights(i) = (weights(i) + p_neuron.weights(i)) / 2
+        Next
+        n.bias = (bias + p_neuron.bias) / 2
+        n.SetWeights(weights)
+        Return n
     End Function
 End Class
